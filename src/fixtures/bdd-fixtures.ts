@@ -1,20 +1,26 @@
+
 import { test as base } from 'playwright-bdd';
+
 import { LoginPage } from '../pages/login.page';
 import { InventoryPage } from '../pages/inventory.page';
+import { CheckoutPage } from '../pages/checkout.page';
 
-// Declare structural type typing endpoints for your framework fixtures 
 type ContextFixtures = {
   loginPage: LoginPage;
   inventoryPage: InventoryPage;
+  checkoutPage: CheckoutPage;
 };
 
-// Extend the core playwright-bdd wrapper initialization setup
 export const test = base.extend<ContextFixtures>({
   loginPage: async ({ page }, use) => {
-    // Automatically wraps and instantiates your POM login layout on initialization
     await use(new LoginPage(page));
   },
+
   inventoryPage: async ({ page }, use) => {
     await use(new InventoryPage(page));
+  },
+
+  checkoutPage: async ({ page }, use) => {
+    await use(new CheckoutPage(page));
   },
 });
